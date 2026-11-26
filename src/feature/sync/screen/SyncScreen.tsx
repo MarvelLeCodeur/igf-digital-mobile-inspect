@@ -7,7 +7,7 @@ import { useSyncScreen } from './useSyncScreen';
 import { styles } from './SyncScreen.styles';
 
 export function SyncScreen() {
-    const {workspace,last,sync,updated,refreshing,error,jobs,resumeFindingPieces,resuming,resumeAll} = useSyncScreen();
+    const {workspace,last,sync,updated,refreshing,error,jobs,resumeOne,resuming,resumeAll} = useSyncScreen();
     if (!workspace.session) return <Redirect href="/login" />;
     return (
         <MobileLayout active="home" title="Synchronisation" back>
@@ -24,7 +24,8 @@ export function SyncScreen() {
                     <Text style={styles.text}>{job.files.map(file=>file.name).join(', ')}</Text>
                     {job.error ? <Text accessibilityRole="alert" style={styles.error}>{job.error}</Text> : null}
                     <PrimaryAction label={job.busy ? 'Dépôt en cours…' : 'Reprendre le dépôt'} disabled={job.busy}
-                        onPress={()=>void resumeFindingPieces(job.findingId)} />
+                        // La reprise d'un dossier affiche un toast de succès ou d'erreur à la fin.
+                        onPress={()=>void resumeOne(job.findingId)} />
                 </View>)}
                 <ScreenRow title="Dernière synchronisation" subtitle={updated && last ? last.toLocaleString('fr-FR') : 'Aucune actualisation manuelle réussie'} icon="checkbox-circle-line" />
                 <ScreenRow title="Mode hors ligne" subtitle="Les pièces en attente restent disponibles tant que l’application et la session restent ouvertes." icon="wifi-off-line" />

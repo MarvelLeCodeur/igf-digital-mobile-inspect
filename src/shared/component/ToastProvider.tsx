@@ -10,22 +10,23 @@ const tones = {
     error:{title:'Une erreur est survenue',color:'#a3263b',tint:'#ffedf0',icon:'error-warning-line'},
 } as const;
 type Tone = keyof typeof tones;
-type ShowToast = (tone:Tone,message:string)=>void;
+// Le titre est facultatif : sans lui, le titre par défaut du ton est utilisé.
+type ShowToast = (tone:Tone,message:string,title?:string)=>void;
 
 const Toast = createContext<ShowToast>(()=>{});
 
 export function ToastProvider({children}:PropsWithChildren) {
     const insets = useSafeAreaInsets();
-    const [notice,setNotice] = useState<{tone:Tone;message:string}|null>(null);
+    const [notice,setNotice] = useState<{tone:Tone;message:string;title?:string}|null>(null);
     const timer = useRef<ReturnType<typeof setTimeout>|null>(null);
     const dismiss = useCallback(()=>{
         if(timer.current) clearTimeout(timer.current);
         timer.current = null;
         setNotice(null);
     },[]);
-    const show = useCallback<ShowToast>((tone,message)=>{
+    const show = useCallback<ShowToast>((tone,message,title)=>{
         if(timer.current) clearTimeout(timer.current);
-        setNotice({tone,message});
+        setNotice({tone,message,title});
         timer.current = setTimeout(dismiss,tone === 'error' ? 7500 : 5500);
     },[dismiss]);
     useEffect(()=>()=>{if(timer.current)clearTimeout(timer.current);},[]);
@@ -37,7 +38,7 @@ export function ToastProvider({children}:PropsWithChildren) {
                 <View accessibilityLiveRegion={notice.tone==='error'?'assertive':'polite'} style={[styles.card,{borderColor:style.tint}]}>
                     <View style={[styles.icon,{backgroundColor:style.tint}]}><RemixIcon name={style.icon} color={style.color} size={22} /></View>
                     <View style={styles.content}>
-                        <Text style={[styles.title,{color:style.color}]}>{style.title}</Text>
+                        <Text style={[styles.title,{color:style.color}]}>{notice.title ?? style.title}</Text>
                         <Text style={styles.message}>{notice.message}</Text>
                     </View>
                     <Pressable accessibilityRole="button" accessibilityLabel="Fermer le message" onPress={dismiss} style={styles.close}>

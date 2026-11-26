@@ -14,13 +14,15 @@ export function useHomeScreen() {
     const [updated,setUpdated] = useState(false);
     const [error,setError] = useState('');
     const revision = useRef(0);
-
+    // Dernier message d'échec, lisible juste après l'appel de refresh (l'état `error` n'est pas encore à jour à ce moment).
+    const lastError = useRef('');
 
     const refresh = useCallback(async () => {
         if (!session) return false;
         const request = ++revision.current;
         setRefreshing(true);
         setError('');
+        lastError.current = '';
         try {
             // Le compteur suit le meme perimetre que la liste des missions.
             const [summary, analytics] = await Promise.allSettled([missionService.summary(), getHomeTotals()]);
@@ -33,8 +35,10 @@ export function useHomeScreen() {
             return true;
         } catch (cause) {
             if (request === revision.current) {
+                const message = cause instanceof Error ? cause.message : 'Actualisation indisponible.';
                 setUpdated(false);
-                setError(cause instanceof Error ? cause.message : 'Actualisation indisponible.');
+                setError(message);
+                lastError.current = message;
             }
             return false;
         } finally {
@@ -56,5 +60,5 @@ export function useHomeScreen() {
         router.replace(status ? {pathname:'/missions',params:{status}} : '/missions');
     }
 
-    return {workspace, active, totals, refreshing, updated, error, refresh, openMissions};
+    return {workspace, active, totals, refreshing, updated, error, lastError, refresh, openMissions};
 }
