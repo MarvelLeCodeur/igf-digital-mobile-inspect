@@ -1,0 +1,26 @@
+import { StyleSheet } from 'react-native';
+
+export const styles = StyleSheet.create({
+    safe:{flex:1,backgroundColor:'#f6f8fc'},
+    shell:{flex:1,backgroundColor:'#eef2f8'},
+    header:{minHeight:66,backgroundColor:'#f6f8fc',flexDirection:'row',alignItems:'center',justifyContent:'space-between',paddingHorizontal:14},
+    headerAction:{width:44,height:44,alignItems:'center',justifyContent:'center'},
+    logo:{width:154,height:58},
+    brand:{alignItems:'center',gap:8},
+    name:{color:'#0b204c',fontSize:25,fontWeight:'800',letterSpacing:-.7},
+    flag:{width:106,height:4,flexDirection:'row',borderRadius:1,overflow:'hidden'},
+    cyan:{flex:1,backgroundColor:'#0077f5'},
+    yellow:{flex:1,backgroundColor:'#fdd600'},
+    red:{flex:1,backgroundColor:'#e62023'},
+    body:{flex:1},
+    dot:{position:'absolute',top:9,right:9,width:9,height:9,borderRadius:5,backgroundColor:'#e52225',borderWidth:1,borderColor:'#fff'},
+    tabs:{flexDirection:'row',backgroundColor:'#fbfcff',borderTopWidth:1,borderColor:'#e7ebf3',paddingHorizontal:8,paddingBottom:4,minHeight:64},
+    tab:{flex:1,minHeight:56,alignItems:'center',justifyContent:'center',gap:3},
+    tabLabel:{color:'#203258',fontSize:11,fontWeight:'600'},
+    tabSelected:{color:'#0847aa',fontWeight:'800'},
+    add:{marginTop:-18,width:53,height:53,borderRadius:30,alignItems:'center',justifyContent:'center',backgroundColor:'#0855a8',borderWidth:3,borderColor:'#fbfcff',elevation:5},
+    landingSafe:{backgroundColor:'#f7f9fd'},
+    landingShell:{backgroundColor:'#e9effa',backgroundImage:'linear-gradient(180deg, #f7f9fc 0%, #e7eef9 100%)'},
+    landingHeader:{minHeight:72,paddingHorizontal:15,backgroundColor:'transparent'},
+    landingFlag:{width:145,height:5,borderRadius:3},
+});

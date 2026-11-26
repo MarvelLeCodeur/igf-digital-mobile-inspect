@@ -1,0 +1,27 @@
+﻿import { StyleSheet } from 'react-native';
+
+export const styles = StyleSheet.create({
+    content:{width:'100%',maxWidth:560,alignSelf:'center',paddingHorizontal:'4.8%',paddingTop:12,paddingBottom:43,gap:9},
+    subtitle:{textAlign:'center',fontSize:19,lineHeight:24,color:'#0b1742',marginBottom:12},
+    welcome:{minHeight:91,borderRadius:17,backgroundColor:'#d0e6fc',backgroundImage:'linear-gradient(145deg, #d9ebfc 0%, #bbdaf9 100%)',
+        overflow:'hidden',flexDirection:'row',alignItems:'center',paddingHorizontal:18,gap:14},
+    welcomeRibbon:{position:'absolute',right:0,bottom:0,width:'46%',height:'61%'},
+    welcomeIcon:{width:49,height:49,borderRadius:25,backgroundColor:'#e9f3ff',alignItems:'center',justifyContent:'center'},
+    welcomeDivider:{width:1,height:43,backgroundColor:'#99b9e4'},
+    icon:{width:51,height:48,borderRadius:16,backgroundColor:'#eaf2fd',alignItems:'center',justifyContent:'center'},
+    featuredIcon:{backgroundColor:'transparent'},
+    heading:{gap:2,flex:1},
+    title:{fontSize:23,fontWeight:'800',color:'#0b1742',letterSpacing:-.3},
+    caption:{fontSize:17,color:'#10234e'},
+    row:{minHeight:67,backgroundColor:'#f7f9fd',borderWidth:1,borderColor:'#f9fbff',borderRadius:17,paddingHorizontal:14,
+        flexDirection:'row',alignItems:'center',gap:12,elevation:3,shadowColor:'#263e69',shadowOpacity:.15,shadowRadius:5,shadowOffset:{width:0,height:3}},
+    activeRow:{minHeight:59,marginBottom:9},
+    featured:{backgroundColor:'#075bb8',backgroundImage:'linear-gradient(158deg, #087ccc 0%, #0758b7 42%, #176db5 100%)',borderColor:'#086dc7'},
+    divider:{width:1,height:27,backgroundColor:'#b9cbe5'},
+    featuredDivider:{backgroundColor:'#ffffff65'},
+    white:{color:'#fff'},
+    label:{flex:1,color:'#0c1641',fontWeight:'800',fontSize:17,letterSpacing:-.22},
+    dot:{width:10,height:10,borderRadius:5,backgroundColor:'#23a55a'},
+    pressed:{opacity:.82},
+    error:{color:'#af2638'},
+});
