@@ -7,6 +7,7 @@ export const styles = StyleSheet.create({
         overflow:'hidden',flexDirection:'row',alignItems:'center',paddingHorizontal:18,gap:14},
     welcomeRibbon:{position:'absolute',right:0,bottom:0,width:'46%',height:'61%'},
     welcomeIcon:{width:49,height:49,borderRadius:25,backgroundColor:'#e9f3ff',alignItems:'center',justifyContent:'center'},
+    welcomeAvatar:{width:49,height:49,borderRadius:25},
     welcomeDivider:{width:1,height:43,backgroundColor:'#99b9e4'},
     icon:{width:51,height:48,borderRadius:16,backgroundColor:'#eaf2fd',alignItems:'center',justifyContent:'center'},
     featuredIcon:{backgroundColor:'transparent'},

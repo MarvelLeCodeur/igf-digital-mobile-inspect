@@ -1,4 +1,5 @@
 import { ActivityIndicator, Image, Pressable, RefreshControl, ScrollView, Text, View } from 'react-native';
+import { useState } from 'react';
 import { Redirect, router } from 'expo-router';
 import { MobileLayout } from '../../../shared/component/MobileLayout/MobileLayout';
 import { RemixIcon } from '../../../shared/component/RemixIcon';
@@ -7,6 +8,9 @@ import { useHomeScreen } from './useHomeScreen';
 
 export function HomeScreen() {
     const { workspace, active, refreshing, error, refresh, openMissions, updated } = useHomeScreen();
+    // Photo de profil de l'utilisateur ; l'icône sert de repli si elle est absente ou ne charge pas.
+    const avatar = workspace.profile?.avatar ?? null;
+    const [failedAvatar,setFailedAvatar] = useState<string | null>(null);
     if (!workspace.session) return <Redirect href="/login" />;
 
     const links = [
@@ -23,7 +27,11 @@ export function HomeScreen() {
                 <Text style={styles.subtitle}>Application de terrain —{'\n'}Missions et constats</Text>
                 <View style={styles.welcome}>
                     <Image source={require('../../../../assets/inspect-home-wave.png')} style={styles.welcomeRibbon} resizeMode="stretch" accessible={false} />
-                    <View style={styles.welcomeIcon}><RemixIcon name="user-line" size={28} color="#073b9e" /></View>
+                    <View style={styles.welcomeIcon}>
+                        {avatar && avatar !== failedAvatar
+                            ? <Image source={{uri:avatar}} style={styles.welcomeAvatar} accessibilityLabel="Photo de profil" onError={() => setFailedAvatar(avatar)} />
+                            : <RemixIcon name="user-line" size={28} color="#073b9e" />}
+                    </View>
                     <View style={styles.welcomeDivider} />
                     <View style={styles.heading}><Text style={styles.title}>Bienvenue !</Text><Text style={styles.caption}>Sur IGF Inspect</Text></View>
                 </View>
